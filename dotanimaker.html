@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>ドットアニメイカー</title>
+
+  <link rel="stylesheet" href="dotanimaker.css">
+</head>
+
+<body>
+  <h1>
+    <img src="mainlogo.png" alt="ドットアニメイカー">
+  </h1>
+
+  <div id="sizeselect">
+    <button id="x8" class="sizebutton">8x8</button>
+    <button id="x16" class="sizebutton">16x16</button>
+  </div>
+
+  <div id="topform">
+    <select id="komatime" onchange="komatimeChange()">
+      <option value=250>1秒4コマ</option>
+      <option value=500>1秒2コマ</option>
+      <option value=1000 selected>1秒1コマ</option>
+    </select>
+  </div>
+
+  <div id="contena">
+    <div id="maintable"></div>
+    <div id="colortable"></div>
+  </div>
+
+  <div id="seek">
+    <input id="seekbar" type="range" min="1" max="2" value="1" step="1" onchange="seekchoice()">
+    <p id="seeknum">1/1</p>
+  </div>
+
+  <div id="makebutton">
+    <button id="prev" class="makebutton">前のコマ</button>
+    <button id="addkoma" class="makebutton" onclick="addkoma()">新しいコマ</button>
+    <button id="delkoma" class="makebutton" onclick="delkoma()">コマの削除</button>
+    <button id="next" class="makebutton" onclick="nextkoma()">次のコマ</button>
+  </div>
+
+  <div id="playbutton">
+    <button id="play" class="playbutton" onclick="playanime()">再生</button>
+    <button id="stop" class="playbutton" onclick="stopanime()">停止</button>
+  </div>
+
+  <div id="explain">
+    <table>
+      <tr>
+        <td class="th2"></td>
+        <td class="th2"></td>
+        <td class="th2"></td>
+        <td class="th2"></td>
+        <td class="th2"></td>
+        <td class="th2">使</td>
+        <td class="th2"></td>
+        <td class="th2">い</td>
+        <td class="th2"></td>
+        <td class="th2">方</td>
+        <td class="th2"></td>
+        <td class="th2"></td>
+        <td class="th2"></td>
+        <td class="th2"></td>
+        <td class="th2"></td>
+      </tr>
+    </table>
+    <p>ドット絵のアニメを作れます。<br>
+      右のカラーパレットから色を選んで左のキャンバスに好きな絵を描いて下さい。<br>
+      新しいコマボタンを押すと現在のコマをコピーして新しいコマが作られます。<br>
+      新しいコマの修正を繰り返してアニメを作って下さい。<br>
+    </p>
+    <table>
+      <tr>
+        <td class="th3">サ</td>
+        <td class="th3">イ</td>
+        <td class="th3">ズ</td>
+        <td class="th3">切</td>
+        <td class="th3">り</td>
+        <td class="th3">替</td>
+        <td class="th3">え</td>
+        <td class="th3">ボ</td>
+        <td class="th3">タ</td>
+        <td class="th3">ン</td>
+      </tr>
+    </table>
+    <p>縦横8ドットと16ドットを切り替えられます。<br>
+      切り替えると作成中のデータが消えちゃいます。</p>
+    <table>
+      <tr>
+        <td class="th3">再</td>
+        <td class="th3">生</td>
+        <td class="th3">ス</td>
+        <td class="th3">ピ</td>
+        <td class="th3">ー</td>
+        <td class="th3">ド</td>
+        <td class="th3">切</td>
+        <td class="th3">り</td>
+        <td class="th3">替</td>
+        <td class="th3">え</td>
+      </tr>
+    </table>
+    <p>1秒4コマ、2コマ、1コマを切り替えられます。</p>
+    <table>
+      <tr>
+        <td class="th3">メ</td>
+        <td class="th3">イ</td>
+        <td class="th3">ン</td>
+        <td class="th3">キ</td>
+        <td class="th3">ャ</td>
+        <td class="th3">ン</td>
+        <td class="th3">バ</td>
+        <td class="th3">ス</td>
+      </tr>
+    </table>
+    <p>好きに絵を描いて下さい。</p>
+    <table>
+      <tr>
+        <td class="th3">カ</td>
+        <td class="th3">ラ</td>
+        <td class="th3">ー</td>
+        <td class="th3">テ</td>
+        <td class="th3">ー</td>
+        <td class="th3">ブ</td>
+        <td class="th3">ル</td>
+      </tr>
+    </table>
+    <p>ピンク色の枠がついている色で塗れます。</p>
+    <table>
+      <tr>
+        <td class="th3">前</td>
+        <td class="th3">の</td>
+        <td class="th3">コ</td>
+        <td class="th3">マ</td>
+        <td class="th3">、</td>
+        <td class="th3">次</td>
+        <td class="th3">の</td>
+        <td class="th3">コ</td>
+        <td class="th3">マ</td>
+      </tr>
+    </table>
+    <p>そのまんまです。</p>
+    <table>
+      <tr>
+        <td class="th3">新</td>
+        <td class="th3">し</td>
+        <td class="th3">い</td>
+        <td class="th3">コ</td>
+        <td class="th3">マ</td>
+      </tr>
+    </table>
+    <p>現在のコマをコピーして新しいコマを作ります。<br>
+      その修正を繰り返してアニメにしましょう。</p>
+    <table>
+      <tr>
+        <td class="th3">コ</td>
+        <td class="th3">マ</td>
+        <td class="th3">の</td>
+        <td class="th3">削</td>
+        <td class="th3">除</td>
+      </tr>
+    </table>
+    <p>現在のコマが消えます。<br>
+      取り消しはできませんので注意して下さい。</p>
+    <table>
+      <tr>
+        <td class="th3">再</td>
+        <td class="th3">生</td>
+        <td class="th3">、</td>
+        <td class="th3">停</td>
+        <td class="th3">止</td>
+      </tr>
+    </table>
+    <p>そのまんまです。</p>
+  </div>
+
+  <footer>Developed by tomotsky.</footer>
+
+  <script src="dotanimaker.js"></script>
+</body>
+
+</html>
