@@ -54,7 +54,6 @@ const buttonx8 = document.getElementById('x8');
 buttonx8.disabled = true;
 buttonx8.onclick = () => {
   if (confirm('サイズの変更。\n今まで作ったものが消えてしまいますが、よろしいですか？')) {
-    console.log('x8');
     animation = [];
     sizetotal = 64;
     sizeclassname = 'dot';
@@ -75,7 +74,6 @@ buttonx8.onclick = () => {
 const buttonx16 = document.getElementById('x16');
 buttonx16.onclick = () => {
   if (confirm('サイズの変更。\n今まで作ったものが消えてしまいますが、よろしいですか？')) {
-    console.log('x16');
     animation = [];
     sizetotal = 256;
     sizeclassname = 'dot16';
@@ -100,8 +98,9 @@ function komatimeChange() {
 
 // maintable
 function maintable() {
-  while (document.getElementById('maintable').firstChild)
+  while (document.getElementById('maintable').firstChild) {
     document.getElementById('maintable').removeChild(document.getElementById('maintable').firstChild);
+  }
   for (let i = 0; i < sizetotal; i++) {
     const dot = document.createElement('span');
     dot.id = 'd_' + i;
@@ -132,7 +131,6 @@ for (let i = 0; i < 16; i++) {
     paintColor = colorbox.style.backgroundColor;
     document.getElementById(paintColor).className = 'colorbox2';
     document.getElementById(lastColor).className = 'colorbox';
-    console.log(paintColor);
   }
   document.getElementById('colortable').appendChild(colorbox);
   document.getElementById(paintColor).className = 'colorbox2';
@@ -147,7 +145,6 @@ function seekNum(n) {
 
 function seekchoice() {
   const num = document.getElementById('seekbar').value;
-  console.log(num);
   current = num - 1;
   komadraw(current);
   document.getElementById('seeknum').innerText = num + '/' + animation.length;
@@ -163,7 +160,6 @@ prevkoma.onclick = () => {
     komadraw(current);
   }
   seekNum(current);
-  console.log(current);
 }
 
 // add
@@ -182,7 +178,6 @@ delkoma.onclick = () => {
   if (animation.length > 1) {
     if (confirm('このコマを削除しますか？')) {
       animation.splice(current, 1);
-      console.log('del');
       if (current > 0) { current--; }
       komadraw(current);
       seekNum(current);
